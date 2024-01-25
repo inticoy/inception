@@ -15,9 +15,17 @@ server {
 	ssl_certificate /cert.crt;
 	ssl_certificate_key /cert.key;
 
+	# location ~ [^/]\.php(/|$) { 
+    #         include fastcgi_params;
+    #         try_files $uri=404;
+    #         fastcgi_pass wordpress:9000;
+    #         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    # }
+
 	location / {
 		proxy_pass https://www.google.com;
 	}
+    
 
     # listen 443 ssl;
     # listen [::]:443 ssl;
@@ -25,9 +33,6 @@ server {
     # ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
     # index index.php;
     # root /var/www/html;
-    # location ~ [^/]\.php(/|$) { 
-    #         try_files $uri =404;
-    #     }
 }
 " >  /etc/nginx/sites-available/default
 
