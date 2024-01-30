@@ -1,13 +1,13 @@
-ARG RELEASE=bullseye
+ARG RELEASE=bullseye-20240110
 
 FROM debian:${RELEASE}
 
-# COPY ./tools/script.sh /
+COPY ./tools/script.sh /tmp/script.sh
 
 RUN	apt-get update -y \
 	&& apt-get upgrade -y \
 	&& apt-get install -y \
-	mariadb-server 
-	# && sh /script.sh
+	mariadb-server \
+	&& sh /tmp/script.sh
 
-# ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "/usr/bin/mariadbd-safe" ]
