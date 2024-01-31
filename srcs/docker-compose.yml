@@ -1,39 +1,15 @@
+version: '3.8'
+volumes:
+  mariadbv:
 services:
-  nginx:
-    image: gyoon/nginx
-    container_name: gyoon-nginx
-    build: ./requirements/nginx/.
-    ports:
-      - "443:443"
-    networks:
-      - inception
-    restart: always
-  
-  wordpress:
-    image: gyoon/wordpress
-    container_name: gyoon-wordpress
-    build: ./requirements/wordpress/.
-    expose:
-      - "9000"
-    networks:
-      - inception
-    restart: always
-
   mariadb:
     image: gyoon/mariadb
     container_name: gyoon-mariadb
     build: ./requirements/mariadb/.
+    volumes:
+      - "mariadbv:/var/lib/mysql"
+    env_file:
+      - .env
     expose:
       - "3306"
-    networks:
-      - inception
     restart: always
-
-networks:
-  inception:
-    name: inception
-
-# volumes:
-#   wordpress:
-#     name: wordpress
-    
