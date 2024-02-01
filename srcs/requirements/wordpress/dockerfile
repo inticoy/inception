@@ -2,17 +2,13 @@ ARG RELEASE=bullseye
 
 FROM debian:${RELEASE}
 
-COPY ./tools/script.sh /
+COPY ./tools/script.sh /tmp/script.sh
 
 RUN apt-get update -y \
 	&& apt-get upgrade -y \
 	&& apt-get install -y \
 	php-fpm \
-	curl \
-	&& sh /script.sh
+	php-mysql \
+	curl
 
-WORKDIR /var/www/html
-
-ENTRYPOINT ["php", "-S", "localhost:9000" ]
-
-# EXPOSE 9000
+ENTRYPOINT ["sh", "/tmp/script.sh" ]

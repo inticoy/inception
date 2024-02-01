@@ -18,10 +18,10 @@ service mariadb start
 echo "CREATE DATABASE IF NOT EXISTS $DB_NAME;" | mariadb -u root
 
 # make a mariadb user
-echo "CREATE USER IF NOT EXISTS '$DB_USER'@'$DB_HOST' IDENTIFIED BY '$DB_PWD';" | mariadb -u root
+echo "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';" | mariadb -u root
 
 # grant all privileges to user on database : user can perform all operations (SELECT, INSERT, ...) on tables within $DB_NAME
-echo "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'$DB_HOST';" | mariadb -u root
+echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';" | mariadb -u root
 
 # reload/apply new privilege tables immediately
 echo "FLUSH PRIVILEGES;" | mariadb -u root
