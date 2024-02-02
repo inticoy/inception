@@ -11,9 +11,11 @@ rm -rf *
 
 wp core download --allow-root
 
-wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=gyoon-mariadb --allow-root
+wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_HOST --allow-root
 
-wp core install --url=localhost --title=inticoy --admin_user=inticoy --admin_password=0000 --admin_email=hello@naver.com --skip-email --allow-root
+wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USERNAME --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_MAIL --skip-email --allow-root
+
+wp user create $WP_USER_NAME $WP_USER_MAIL --user_pass=$WP_USER_PASS --allow-root
 
 sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
 

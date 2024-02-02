@@ -1,7 +1,9 @@
 all: up
 
+re: clean all
+
 up:
-	docker compose --file ./srcs/docker-compose.yml up -d --build 
+	docker compose --file ./srcs/docker-compose.yml up  --build 
 
 down:
 	docker compose --file ./srcs/docker-compose.yml down
@@ -14,4 +16,4 @@ stop:
 
 clean:
 	docker compose -f ./srcs/docker-compose.yml down
-	docker volume rm mariadbv wordpress
+	docker volume rm srcs_db_volume srcs_wp_volume
