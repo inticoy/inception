@@ -5,6 +5,8 @@ cat /etc/mysql/mariadb.conf.d/50-server-default.cnf | sed 's/127.0.0.1/0.0.0.0/'
 # start a mariadb process
 service mariadb start
 
+sleep 2
+
 # make a database
 echo "CREATE DATABASE IF NOT EXISTS $DB_NAME;" | mariadb -u root
 

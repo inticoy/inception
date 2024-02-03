@@ -9,6 +9,8 @@ mv wp-cli.phar /usr/local/bin/wp
 cd /var/www/html
 rm -rf *
 
+sleep 5
+
 wp core download --allow-root
 
 wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_HOST --allow-root
