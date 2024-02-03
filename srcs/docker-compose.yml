@@ -1,7 +1,17 @@
 version: '3.8'
 volumes:
   db_volume:
+    driver: local
+    driver_opts:
+      device: /home/gyoon/data/db_volume/
+      o: bind
+      type: none
   wp_volume:
+    driver: local
+    driver_opts:
+      device: /home/gyoon/data/wp_volume/
+      o: bind
+      type: none
 networks:
   inception:
 services:
