@@ -9,6 +9,7 @@ server {
 
 	listen 443 ssl;
 	listen [::]:443 ssl;
+	server_name $WP_URL www.$WP_URL localhost;
 
     ssl_protocols TLSv1.3;
 	ssl_certificate $SSL_CRT_PATH;

@@ -19,8 +19,6 @@ echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';" | mariadb -u root
 # reload/apply new privilege tables immediately
 echo "FLUSH PRIVILEGES;" | mariadb -u root
 
-# echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';" | mariadb -u root 
-
 service mariadb stop
 
 mysqld
