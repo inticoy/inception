@@ -7,7 +7,7 @@ re: clean all
 up:
 	mkdir -p $(VOL_PATH)wp
 	mkdir -p $(VOL_PATH)db
-	docker compose --file ./srcs/docker-compose.yml up -d --build
+	docker compose --file ./srcs/docker-compose.yml up -d
 
 down:
 	docker compose --file ./srcs/docker-compose.yml down
