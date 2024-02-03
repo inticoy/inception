@@ -20,7 +20,7 @@ stop:
 
 clean:
 	docker compose -f ./srcs/docker-compose.yml down
-	docker volume rm wp db
+	docker volume rm -f wp db
 	rm -rf $(VOL_PATH)db
 	rm -rf $(VOL_PATH)wp
 
