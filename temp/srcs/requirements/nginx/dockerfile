@@ -1,0 +1,13 @@
+ARG RELEASE=bullseye
+
+FROM debian:${RELEASE}
+
+COPY ./tools/script.sh /tmp/script.sh
+
+RUN	apt-get update -y \
+	&& apt-get upgrade -y \
+	&& apt-get install -y \
+	nginx \
+	openssl
+
+ENTRYPOINT ["sh", "/tmp/script.sh"]

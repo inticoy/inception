@@ -1,0 +1,58 @@
+version: '3.8'
+volumes:
+  db:
+    driver_opts:
+      device: /home/gyoon/data/db/
+      o: bind
+      type: none
+  wp:
+    driver_opts:
+      device: /home/gyoon/data/wp/
+      o: bind
+      type: none
+networks:
+  inception:
+services:
+  nginx:
+    image: gyoon/nginx
+    container_name: gyoon-nginx
+    build: ./requirements/nginx/.
+    volumes:
+      - "wp:/var/www/html"
+    env_file:
+      - .env
+    ports:
+      - "443:443"
+    restart: always
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+  wordpress:
+    image: gyoon/wordpress
+    container_name: gyoon-wordpress
+    build: ./requirements/wordpress/.
+    volumes:
+      - "wp:/var/www/html"
+    env_file:
+      - .env
+    expose:
+      - "9000"
+    restart: always
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+  mariadb:
+    image: gyoon/mariadb
+    container_name: gyoon-mariadb
+    build: ./requirements/mariadb/.
+    volumes:
+      - "db:/var/lib/mysql"
+    env_file:
+      - .env
+    expose:
+      - "3306"
+    restart: always
+    networks:
+      - inception
