@@ -1,15 +1,13 @@
 version: '3.8'
 volumes:
-  db_volume:
-    driver: local
+  db:
     driver_opts:
-      device: /home/gyoon/data/db_volume/
+      device: /home/gyoon/data/db/
       o: bind
       type: none
-  wp_volume:
-    driver: local
+  wp:
     driver_opts:
-      device: /home/gyoon/data/wp_volume/
+      device: /home/gyoon/data/wp/
       o: bind
       type: none
 networks:
@@ -20,7 +18,7 @@ services:
     container_name: gyoon-nginx
     build: ./requirements/nginx/.
     volumes:
-      - "wp_volume:/var/www/html"
+      - "wp:/var/www/html"
     env_file:
       - .env
     ports:
@@ -35,7 +33,7 @@ services:
     container_name: gyoon-wordpress
     build: ./requirements/wordpress/.
     volumes:
-      - "wp_volume:/var/www/html"
+      - "wp:/var/www/html"
     env_file:
       - .env
     expose:
@@ -50,7 +48,7 @@ services:
     container_name: gyoon-mariadb
     build: ./requirements/mariadb/.
     volumes:
-      - "db_volume:/var/lib/mysql"
+      - "db:/var/lib/mysql"
     env_file:
       - .env
     expose:

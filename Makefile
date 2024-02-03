@@ -1,9 +1,13 @@
+VOL_PATH = /home/gyoon/data/
+
 all: up
 
 re: clean all
 
 up:
-	docker compose --file ./srcs/docker-compose.yml up  --build 
+	mkdir -p $(VOL_PATH)wp
+	mkdir -p $(VOL_PATH)db
+	docker compose --file ./srcs/docker-compose.yml up
 
 down:
 	docker compose --file ./srcs/docker-compose.yml down
@@ -16,4 +20,7 @@ stop:
 
 clean:
 	docker compose -f ./srcs/docker-compose.yml down
-	docker volume rm srcs_db_volume srcs_wp_volume
+	docker volume rm wp db
+	rm -rf $(VOL_PATH)db
+	rm -rf $(VOL_PATH)wp
+
